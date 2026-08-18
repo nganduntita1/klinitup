@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&family=Outfit:wght@400;600;800&family=Righteous&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -48,7 +48,7 @@
 .animate-scale-in {
   animation: scaleIn 1s var(--ease-out-expo) both;
 }
-.animate-word-reveal > span {
+.animate-word {
   animation: wordReveal 0.7s var(--ease-out-expo) both;
 }
 

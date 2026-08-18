@@ -30,12 +30,11 @@ const PRODUCT_IMG =
   'https://polo-pecan-73837341.figma.site/_assets/v11/50ad042b3cd48a2e120ea3ba17c8cfeaf3cc334c.png';
 const PANEL1_DECOR =
   'https://polo-pecan-73837341.figma.site/_assets/v11/6736cbe6e26afa2cd7c04a91892a79f7640785b5.png';
-const PANEL3_PRODUCT =
-  'https://polo-pecan-73837341.figma.site/_assets/v11/30e8f38d1f993c357a3be2721557fc899d5640fc.png';
+const PANEL3_PRODUCT = '/src/assets/images/panel3_trust_image.png';
 
-const HERO_FLOATING_IMG = '/src/assets/images/Gemini_Generated_Image_wtljmuwtljmuwtlj__1_-removebg-preview.png';
-const ABOUT_IMG_1 = '/src/assets/images/Gemini_Generated_Image_wtljmuwtljmuwtlj_(2).jpg';
-const ABOUT_IMG_2 = '/src/assets/images/Gemini_Generated_Image_wtljmuwtljmuwtlj_(3).jpg';
+const HERO_FLOATING_IMG = '/src/assets/images/product.png';
+const ABOUT_IMG_1 = '/src/assets/images/image.jpg';
+const ABOUT_IMG_2 = '/src/assets/images/image1.jpg';
 const TEAM_IMG = '/src/assets/images/WhatsApp_Image_2026-08-18_at_13.37.15.jpeg';
 
 const NAV_LINKS = ['About', 'Services', 'Promotions', 'Contact'];
@@ -44,7 +43,7 @@ const CARDS = [
   { icon: Sparkles, bg: 'bg-black', text: 'Deep cleaning that brings a fresh, spotless shine to every room' },
   { icon: Recycle, bg: 'bg-emerald-800', text: 'Eco-friendly waste sorting and recycling for homes & offices' },
   { icon: Sparkles, bg: 'bg-cyan-800', text: 'Sanitisation & disinfection for a healthier environment' },
-  { icon: Truck, bg: 'bg-amber-700', text: 'Reliable scheduled waste collection across Cape Town' },
+  { icon: Truck, bg: 'bg-amber-700', text: 'Reliable scheduled waste collection across Mafikeng' },
 ];
 
 const SERVICES = [
@@ -96,8 +95,6 @@ const STATS = [
 const GALLERY = [
   { src: ABOUT_IMG_1, title: 'Sparkling Office Spaces' },
   { src: ABOUT_IMG_2, title: 'Spotless Home Interiors' },
-  { src: TEAM_IMG, title: 'Our Trained Team' },
-  { src: HERO_FLOATING_IMG, title: 'Waste Sorted Right' },
 ];
 
 const WORD_DELAYS = ['delay-300', 'delay-400', 'delay-500', 'delay-600', 'delay-700', 'delay-800', 'delay-900'];
@@ -105,7 +102,7 @@ const WORD_DELAYS = ['delay-300', 'delay-400', 'delay-500', 'delay-600', 'delay-
 function Word({ children, delay, className = '' }: { children: React.ReactNode; delay: string; className?: string }) {
   return (
     <span className="inline-block overflow-hidden align-bottom">
-      <span className={`inline-block ${delay} ${className}`}>{children}</span>
+      <span className={`inline-block animate-word ${delay} ${className}`}>{children}</span>
     </span>
   );
 }
@@ -129,7 +126,7 @@ function App() {
     <div className="relative flex min-h-screen flex-col overflow-hidden">
       {/* Background */}
       <div
-        className="absolute inset-0 z-0"
+        className="fixed inset-0 z-0"
         style={{
           backgroundImage: `url(${BG_IMAGE})`,
           backgroundSize: 'cover',
@@ -139,10 +136,10 @@ function App() {
       />
 
       {/* Navbar */}
-      <nav className="animate-fade-in relative z-20 flex items-center justify-between px-5 py-4 sm:px-8 lg:px-10 lg:py-5">
+      <nav className={`animate-fade-in relative ${menuOpen ? 'z-40' : 'z-20'} flex items-center justify-between px-5 py-4 sm:px-8 lg:px-10 lg:py-5`}>
         <div
-          className="animate-slide-left delay-200 text-white"
-          style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: '30px', letterSpacing: '-0.05em' }}
+          className="animate-slide-left delay-200 text-white flex items-center gap-2"
+          style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: '32px', letterSpacing: '-0.02em' }}
         >
           KLIN IT UP
         </div>
@@ -151,7 +148,7 @@ function App() {
           {NAV_LINKS.map((link) => (
             <a
               key={link}
-              href="#"
+              href={`#${link.toLowerCase()}`}
               className="text-white/90 transition-colors hover:text-white"
               style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: '18px' }}
             >
@@ -161,10 +158,9 @@ function App() {
         </div>
 
         <div className="animate-slide-right delay-300 flex items-center gap-4 lg:gap-5">
-          <button className="text-white transition-opacity hover:opacity-70" aria-label="Search"><Search size={20} strokeWidth={1.5} /></button>
-          <button className="text-white transition-opacity hover:opacity-70" aria-label="Services"><ShoppingBag size={20} strokeWidth={1.5} /></button>
-          <button className="text-white transition-opacity hover:opacity-70" aria-label="Quote"><CornerUpLeft size={20} strokeWidth={1.5} /></button>
-          <img src={AVATAR} alt="User avatar" className="h-8 w-8 rounded-full object-cover lg:h-10 lg:w-10" />
+          <button className="hidden sm:block rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition-colors hover:bg-white/90">
+            Get Quote
+          </button>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-white transition-opacity hover:opacity-70 lg:hidden"
@@ -181,7 +177,7 @@ function App() {
           {NAV_LINKS.map((link) => (
             <a
               key={link}
-              href="#"
+              href={`#${link.toLowerCase()}`}
               onClick={() => setMenuOpen(false)}
               className="text-2xl text-white"
               style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}
@@ -194,21 +190,30 @@ function App() {
 
       {/* Hero content */}
       <section className="relative z-10 flex flex-1 flex-col justify-center px-5 pb-8 pt-4 sm:px-8 lg:px-10 lg:pb-16 lg:pt-6">
+        {/* Product image */}
+        <div className="absolute top-[40%] sm:top-[15%] lg:top-[25%] z-0 pointer-events-none w-[90%] sm:w-[65%] lg:w-[45%] max-w-[1000px] left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-[15%] lg:translate-x-[20%]">
+          <img
+            src={HERO_FLOATING_IMG}
+            alt="Klin It Up cleaning"
+            className="animate-scale-in delay-800 w-full h-auto object-contain drop-shadow-2xl"
+          />
+        </div>
+
         <h1
-          className="animate-word-reveal text-white"
-          style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, letterSpacing: '-0.05em', fontSize: '48px', lineHeight: '50px' }}
+          className="text-white relative z-10 pointer-events-none"
+          style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, letterSpacing: '-0.05em' }}
         >
-          <span className="block sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
+          <span className="block text-[48px] leading-[50px] sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
             <Word delay={WORD_DELAYS[0]}>Clean </Word>
             <Word delay={WORD_DELAYS[1]}>Spaces,</Word>
             <Word delay={WORD_DELAYS[2]} className="text-white/45">in</Word>
           </span>
-          <span className="block sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
+          <span className="block text-[48px] leading-[50px] sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
             <Word delay={WORD_DELAYS[3]} className="text-white/45">Every </Word>
             <Word delay={WORD_DELAYS[4]} className="text-white/45">Corner </Word>
             <Word delay={WORD_DELAYS[5]}>We</Word>
           </span>
-          <span className="block sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
+          <span className="block text-[48px] leading-[50px] sm:text-[80px] sm:leading-[72px] md:text-[110px] md:leading-[95px] lg:text-[130px] lg:leading-[110px] xl:text-[155px] xl:leading-[125px]">
             <Word delay={WORD_DELAYS[6]}>Klin</Word>
             <img
               src={CAPSULE_IMG}
@@ -220,7 +225,7 @@ function App() {
         </h1>
 
         {/* CTA */}
-        <div className="animate-fade-up delay-600 mt-8 flex flex-col gap-5 sm:mt-12 sm:flex-row sm:items-center sm:gap-8 lg:mt-[75px] lg:gap-[50px]">
+        <div className="animate-fade-up delay-600 mt-8 flex flex-col gap-5 sm:mt-12 sm:flex-row sm:items-center sm:gap-8 lg:mt-[75px] lg:gap-[50px] relative z-10">
           <button
             className="flex h-14 w-full items-center justify-center gap-2 rounded-md bg-black text-white transition-all hover:bg-black/85 sm:w-[240px] md:w-[280px] lg:h-[72px] lg:w-[310px]"
             style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500, letterSpacing: '-0.03em', fontSize: '16px' }}
@@ -232,56 +237,31 @@ function App() {
             className="max-w-[340px] text-white"
             style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '14px', lineHeight: 1.45, letterSpacing: '-0.03em' }}
           >
-            <span className="sm:text-base lg:text-lg">Professional cleaning & waste management services for homes and businesses across Cape Town.</span>
+            <span className="sm:text-base lg:text-lg">Professional cleaning & waste management services for homes and businesses across Mafikeng.</span>
           </p>
         </div>
       </section>
 
-      {/* Mobile/tablet product image */}
-      <div className="animate-scale-in delay-800 relative z-0 lg:hidden">
-        <img
-          src={HERO_FLOATING_IMG}
-          alt="Klin It Up cleaning"
-          className="mx-auto w-[180%] max-w-[1296px] object-contain drop-shadow-2xl sm:w-[151%]"
-          style={{ marginBottom: '-220px' }}
-        />
-      </div>
-
-      {/* Desktop floating product */}
-      <img
-        src={HERO_FLOATING_IMG}
-        alt="Klin It Up cleaning"
-        className="animate-scale-in delay-700 absolute z-0 hidden lg:block"
-        style={{
-          width: 'clamp(600px, 80vw, 1412px)',
-          height: 'auto',
-          bottom: '-10%',
-          right: 'clamp(-400px, -20vw, -100px)',
-        }}
-      />
-
       {/* Bottom 3-panel grid */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-[2fr_1fr_2fr]">
         {/* Panel 1 */}
-        <div className="animate-fade-up delay-900 relative overflow-hidden bg-[#ECEDEC] p-6 sm:p-8 lg:p-10">
-          <p
-            className="max-w-[350px] text-black"
-            style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: '24px', lineHeight: 1.1, letterSpacing: '-0.05em' }}
-          >
-            <span className="sm:text-[28px] lg:text-[35px]">Book a free site assessment and get a tailored cleaning plan</span>
-          </p>
-          <a
-            href="#contact"
-            className="mt-4 inline-block underline text-black sm:mt-6"
-            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '16px', letterSpacing: '-0.03em' }}
-          >
-            <span className="lg:text-lg">Request a Quote</span>
-          </a>
-          <img
-            src={PANEL1_DECOR}
-            alt=""
-            className="absolute bottom-0 right-0 h-full mix-blend-multiply"
-          />
+        <div className="animate-fade-up delay-900 relative overflow-hidden bg-[#ECEDEC] p-6 sm:p-8 lg:p-10" style={{ backgroundImage: 'url(/src/assets/images/image.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="relative z-10">
+            <p
+              className="max-w-[350px] text-white"
+              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontSize: '24px', lineHeight: 1.1, letterSpacing: '-0.05em' }}
+            >
+              <span className="sm:text-[28px] lg:text-[35px]">Book a free site assessment and get a tailored cleaning plan</span>
+            </p>
+            <a
+              href="#contact"
+              className="mt-4 inline-block underline text-white sm:mt-6"
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '16px', letterSpacing: '-0.03em' }}
+            >
+              <span className="lg:text-lg">Request a Quote</span>
+            </a>
+          </div>
         </div>
 
         {/* Panel 2 - Carousel */}
@@ -546,7 +526,7 @@ function App() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10"><MapPin size={18} strokeWidth={1.5} className="text-white" /></div>
                 <div>
                   <p className="text-sm text-white/50" style={{ fontFamily: 'Inter, sans-serif' }}>Service area</p>
-                  <p className="text-lg" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>Cape Town & surrounding areas</p>
+                  <p className="text-lg" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>Mafikeng</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-white">
@@ -632,7 +612,7 @@ function App() {
             KLIN IT UP
           </p>
           <p className="text-sm text-white/50" style={{ fontFamily: 'Inter, sans-serif' }}>
-            © 2026 KLIN IT UP. Cleaning & waste management services. Cape Town, South Africa.
+            © 2026 KLIN IT UP. Cleaning & waste management services. Mafikeng, South Africa.
           </p>
         </div>
       </footer>
