@@ -30,12 +30,18 @@ const PRODUCT_IMG =
   'https://polo-pecan-73837341.figma.site/_assets/v11/50ad042b3cd48a2e120ea3ba17c8cfeaf3cc334c.png';
 const PANEL1_DECOR =
   'https://polo-pecan-73837341.figma.site/_assets/v11/6736cbe6e26afa2cd7c04a91892a79f7640785b5.png';
-const PANEL3_PRODUCT = '/src/assets/images/panel3_trust_image.png';
+import panel3TrustImage from './assets/images/panel3_trust_image.png';
+import heroFloatingImage from './assets/images/product.png';
+import aboutImage1 from './assets/images/image.jpg';
+import aboutImage2 from './assets/images/image1.jpg';
+import teamImage from './assets/images/WhatsApp_Image_2026-08-18_at_13.37.15.jpeg';
 
-const HERO_FLOATING_IMG = '/src/assets/images/product.png';
-const ABOUT_IMG_1 = '/src/assets/images/image.jpg';
-const ABOUT_IMG_2 = '/src/assets/images/image1.jpg';
-const TEAM_IMG = '/src/assets/images/WhatsApp_Image_2026-08-18_at_13.37.15.jpeg';
+const PANEL3_PRODUCT = panel3TrustImage;
+
+const HERO_FLOATING_IMG = heroFloatingImage;
+const ABOUT_IMG_1 = aboutImage1;
+const ABOUT_IMG_2 = aboutImage2;
+const TEAM_IMG = teamImage;
 
 const NAV_LINKS = ['About', 'Services', 'Promotions', 'Contact'];
 
@@ -245,7 +251,7 @@ function App() {
       {/* Bottom 3-panel grid */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-[2fr_1fr_2fr]">
         {/* Panel 1 */}
-        <div className="animate-fade-up delay-900 relative overflow-hidden bg-[#ECEDEC] p-6 sm:p-8 lg:p-10" style={{ backgroundImage: 'url(/src/assets/images/image.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="animate-fade-up delay-900 relative overflow-hidden bg-[#ECEDEC] p-6 sm:p-8 lg:p-10" style={{ backgroundImage: `url(${ABOUT_IMG_1})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="absolute inset-0 bg-black/40" />
           <div className="relative z-10">
             <p
